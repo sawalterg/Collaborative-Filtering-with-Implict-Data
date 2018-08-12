@@ -96,6 +96,7 @@ scaled_item_user = (sp_item_user * alpha_val).astype('double')
 
 
 
+
 # Fit the scale
 
 als_fitter.fit(scaled_item_user)
