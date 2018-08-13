@@ -105,10 +105,53 @@ als_fitter.fit(scaled_item_user)
 # Create user recommender - start with one user
 
 
-recommendations = []
+recommendations = {}
 for user in df['user_id']:
-    recommendations.append(als_fitter.recommend(user, sp_user_item))
+    recommendations[user_id] = als_fitter.recommend(user, sp_user_item)
 
+
+
+    
+    
+    
+    
+ # Use grid search to optimize hyperparameters
+
+
+# Create ALS model
+
+
+
+# Grid search object
+
+param_grid = {'num_factors': [10,20,40,60], 'regularization': [0.0, 0.0001, 0.001, 0.01, 0.1],
+              'iterations': [20], 'alpha': [1,10,50,100,500]}
+
+# Create implicit algorithm object
+
+als_fitter = implicit.als.AlternatingLeastSquares()
+
+
+# Create grid search object
+gs = GridSearchCV(als_fitter, param_grid, measures = ['rmse', 'mae'], cv = 3,
+                  verbose = True)
+
+# Fit grid search object
+gs.fit(new_train)
+
+
+# print out results and best score based on root mean squared error
+print(gs.cv_results_)
+
+print(gs.best_score_['rmse'])
+
+
+# Make new algorithm based off best parameters
+
+als_fitter_2 = gs.best_estimator['rmse']
+
+# Fit new model
+als_fitter_2.fit(train_trip)
 
 
 
