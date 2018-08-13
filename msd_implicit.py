@@ -56,6 +56,18 @@ play_count_min = df['play count'].min()
 
 song_pop = df.songs.value_counts()
 
+# pivot data to determine most popular songs
+
+song_pivot = df.pivot_table(index = 'songs',
+                      aggfunc = sum)
+
+# Plot histogram for distribution
+sns.set()
+plt.hist(df['play count'], bins = 10, range = [play_count_min, 40], normed = True)
+plt.xlabel('Play counts')
+plt.ylabel('Counts')
+plt.show()
+
 
 # ALS Collaborative Filter using implicit library
 
