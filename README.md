@@ -1,1 +1,1 @@
-Collaborative Filter using implicit with the Kaggle Million Song dataset challenge
+This project seeks to implement a robust collaborative filter using the Million Song challenge dataset. The first phase of this project was completed in python and the Implicit library. The second phase was completed using Apache Spark with the ALS mllib package.
